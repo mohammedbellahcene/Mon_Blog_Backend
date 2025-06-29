@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  security:
+    jwt:
+      secret: "your_jwt_secret_key_must_be_at_least_32_bytes_long_for_hs256_algorithm"
+      access-token-validity: 86400000  # 24 hours in milliseconds
+      refresh-token-validity: 604800000 # 7 days in milliseconds
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.blog.api: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operationsSorter: method
+    tagsSorter: alpha
+    docExpansion: none
+    filter: true
+    tryItOutEnabled: true
+    syntaxHighlight:
+      activated: true
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  show-actuator: false
+  packages-to-scan: com.blog.api.controller
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  writer-with-default-pretty-printer: true
+  override-with-generic-response: false
+  cache:
+    disabled: true
+  use-management-port: false
+  disable-swagger-default-url: true 

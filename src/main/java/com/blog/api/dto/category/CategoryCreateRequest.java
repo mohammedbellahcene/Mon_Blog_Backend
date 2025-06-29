@@ -1,0 +1,26 @@
+package com.blog.api.dto.category;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+@Data
+public class CategoryCreateRequest {
+    @NotBlank(message = "Le nom est requis")
+    @Size(max = 100, message = "Le nom ne doit pas dépasser 100 caractères")
+    private String name;
+
+    @Size(max = 100, message = "Le slug ne doit pas dépasser 100 caractères")
+    private String slug;
+
+    @Size(max = 500, message = "La description ne doit pas dépasser 500 caractères")
+    private String description;
+
+    private String icon;
+
+    private String color;
+
+    private Long parentId;
+
+    private Integer displayOrder;
+} 
