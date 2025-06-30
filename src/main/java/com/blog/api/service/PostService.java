@@ -99,40 +99,10 @@ public class PostService {
             log.info("Thème trouvé: {}", theme.getName());
 
             Post post = new Post();
-            post.setTitle(request.getTitle());
-            post.setContent(request.getContent());
             post.setAuthor(author);
             post.setTheme(theme);
             post.setStatus(request.getStatus());
-            
-            // Gérer les tags
-            if (request.getTags() != null && !request.getTags().isEmpty()) {
-                request.getTags().forEach(tagName -> {
-                    Tag tag = tagRepository.findByName(tagName)
-                            .orElseGet(() -> {
-                                Tag newTag = new Tag();
-                                newTag.setName(tagName);
-                                return tagRepository.save(newTag);
-                            });
-                    post.getTags().add(tag);
-                });
-            }
-
-            // Gérer la date de publication planifiée
-            if (request.getStatus() == Post.Status.SCHEDULED && request.getPublishAt() != null) {
-                post.setScheduledAt(request.getPublishAt());
-            }
-
-            // Générer l'extrait si non fourni
-            if (request.getExcerpt() == null || request.getExcerpt().isEmpty()) {
-                String content = request.getContent();
-                post.setExcerpt(content.length() > 200 ? content.substring(0, 197) + "..." : content);
-            } else {
-                post.setExcerpt(request.getExcerpt());
-            }
-
-            // Calculer le temps de lecture
-            post.setReadTime(calculateReadTime(request.getContent()));
+            updatePostFromRequest(post, request);
 
             Post savedPost = postRepository.save(post);
             log.info("Article créé avec succès, ID: {}", savedPost.getId());
@@ -162,6 +132,7 @@ public class PostService {
         post.setTitle(request.getTitle());
         post.setContent(request.getContent());
         post.setTheme(theme);
+        post.setFeaturedImage(request.getFeaturedImage());
 
         Post updatedPost = postRepository.save(post);
         return PostResponse.fromPost(
