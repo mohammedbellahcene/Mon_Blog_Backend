@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Commentaires", description = "API pour la gestion des commentaires")
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/posts/{postId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
@@ -35,7 +35,7 @@ public class CommentController {
         @ApiResponse(responseCode = "401", description = "Non authentifié"),
         @ApiResponse(responseCode = "404", description = "Article non trouvé")
     })
-    @PostMapping("/posts/{postId}")
+    @PostMapping
     public ResponseEntity<CommentResponse> createComment(
             @Parameter(description = "ID de l'article", required = true)
             @PathVariable Long postId,
@@ -52,7 +52,7 @@ public class CommentController {
                 content = @Content(schema = @Schema(implementation = Page.class))),
         @ApiResponse(responseCode = "404", description = "Article non trouvé")
     })
-    @GetMapping("/posts/{postId}")
+    @GetMapping
     public ResponseEntity<Page<CommentResponse>> getCommentsByPost(
             @Parameter(description = "ID de l'article", required = true)
             @PathVariable Long postId,
@@ -71,14 +71,14 @@ public class CommentController {
         @ApiResponse(responseCode = "403", description = "Non autorisé"),
         @ApiResponse(responseCode = "404", description = "Commentaire non trouvé")
     })
-    @PutMapping("/{id}")
+    @PutMapping("/{commentId}")
     public ResponseEntity<CommentResponse> updateComment(
             @Parameter(description = "ID du commentaire", required = true)
-            @PathVariable Long id,
+            @PathVariable Long commentId,
             @Parameter(description = "Données de mise à jour", required = true)
             @Valid @RequestBody CommentRequest request,
             @AuthenticationPrincipal UserDetails userDetails) {
-        return ResponseEntity.ok(commentService.updateComment(id, request, userDetails.getUsername()));
+        return ResponseEntity.ok(commentService.updateComment(commentId, request, userDetails.getUsername()));
     }
 
     @Operation(summary = "Supprimer un commentaire",
@@ -89,12 +89,12 @@ public class CommentController {
         @ApiResponse(responseCode = "403", description = "Non autorisé"),
         @ApiResponse(responseCode = "404", description = "Commentaire non trouvé")
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> deleteComment(
             @Parameter(description = "ID du commentaire", required = true)
-            @PathVariable Long id,
+            @PathVariable Long commentId,
             @AuthenticationPrincipal UserDetails userDetails) {
-        commentService.deleteComment(id, userDetails.getUsername());
+        commentService.deleteComment(commentId, userDetails.getUsername());
         return ResponseEntity.noContent().build();
     }
 } 
