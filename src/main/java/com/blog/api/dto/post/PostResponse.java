@@ -37,6 +37,7 @@ public class PostResponse {
     public static class AuthorDto {
         private Long id;
         private String username;
+        private String email;
         private String avatar;
     }
 
@@ -74,6 +75,7 @@ public class PostResponse {
         AuthorDto authorDto = new AuthorDto();
         authorDto.setId(post.getAuthor().getId());
         authorDto.setUsername(post.getAuthor().getUsername());
+        authorDto.setEmail(post.getAuthor().getEmail());
         authorDto.setAvatar(post.getAuthor().getAvatar());
         response.setAuthor(authorDto);
 

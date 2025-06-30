@@ -75,9 +75,14 @@ public class PostService {
                 ));
     }
 
+    @Transactional
     public PostResponse getPostById(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post not found"));
+
+        // Incrémenter le compteur de vues
+        post.setViewCount(post.getViewCount() + 1);
+        postRepository.save(post); // Sauvegarder la modification
 
         return PostResponse.fromPost(
                 post,
