@@ -82,9 +82,6 @@ public class Comment {
         if (author != null) {
             author.getComments().remove(this);
         }
-        if (post != null) {
-            post.getComments().remove(this);
-        }
     }
 
     public void incrementReportCount() {

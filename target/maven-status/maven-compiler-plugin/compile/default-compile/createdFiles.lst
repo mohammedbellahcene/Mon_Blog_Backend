@@ -52,6 +52,7 @@ com\blog\api\repository\ThemeRepository.class
 com\blog\api\dto\auth\AuthResponse.class
 com\blog\api\dto\comment\CommentModerationRequest.class
 com\blog\api\controller\FileController.class
+com\blog\api\config\WebConfig.class
 com\blog\api\controller\CategoryController.class
 com\blog\api\dto\category\CategoryResponse.class
 com\blog\api\repository\UserRepository.class

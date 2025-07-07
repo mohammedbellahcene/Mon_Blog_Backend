@@ -25,6 +25,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
+        ex.printStackTrace();
         Map<String, Object> body = new HashMap<>();
         body.put("message", ex.getMessage());
         body.put("status", 400);

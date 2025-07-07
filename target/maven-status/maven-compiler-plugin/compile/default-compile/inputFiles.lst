@@ -57,6 +57,7 @@ C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\post\Post
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\reaction\ReactionStatsResponse.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\repository\PostRepository.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\entity\Tag.java
+C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\config\WebConfig.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\reaction\ReactionResponse.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\service\UserActivityService.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\comment\CommentReportRequest.java

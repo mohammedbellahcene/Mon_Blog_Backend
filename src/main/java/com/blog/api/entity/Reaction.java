@@ -46,7 +46,6 @@ public class Reaction {
     @PreRemove
     private void preRemove() {
         user.getReactions().remove(this);
-        post.getReactions().remove(this);
     }
 
     public enum ReactionType {
