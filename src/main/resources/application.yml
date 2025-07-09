@@ -1,12 +1,9 @@
 server:
   port: 8080
 
+# Si une configuration datasource existe ici, commente-la ou supprime-la pour éviter les conflits avec application.properties
+
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/blog_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update

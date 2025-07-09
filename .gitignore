@@ -1,0 +1,17 @@
+# Fichiers d'environnement (NE JAMAIS COMMITTER DE SECRETS)
+.env
+.env.*
+
+# Dossier de build Java
+/target/
+
+# Fichiers de logs
+*.log
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers de config IDE
+/.idea/
+/.vscode/ 
