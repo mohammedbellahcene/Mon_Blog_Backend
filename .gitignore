@@ -14,4 +14,46 @@ Thumbs.db
 
 # Fichiers de config IDE
 /.idea/
-/.vscode/ 
+/.vscode/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+
+# Fichiers de cache
+*.cache
+
+# Fichiers de configuration locale
+application-local.properties
+application-local.yml
+
+# Fichiers de test
+/test-output/
+/coverage/
+
+# Fichiers de déploiement
+*.war
+*.ear
+
+# Fichiers de base de données (si vous en avez)
+*.db
+*.sqlite
+
+# Fichiers de clés et certificats
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+
+# Fichiers de configuration Maven
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Fichiers de configuration Gradle (si vous migrez plus tard)
+.gradle/
+build/ 
