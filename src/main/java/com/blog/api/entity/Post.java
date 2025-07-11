@@ -110,6 +110,14 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    private boolean featured;
+    public boolean isFeatured() {
+        return featured;
+    }
+    public void setFeatured(boolean featured) {
+        this.featured = featured;
+    }
+
     public enum Status {
         DRAFT,
         SCHEDULED,
