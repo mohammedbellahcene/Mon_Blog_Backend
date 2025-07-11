@@ -2,6 +2,7 @@ package com.blog.api.controller;
 
 import com.blog.api.entity.User;
 import com.blog.api.service.AdminUserService;
+import com.blog.api.dto.user.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +18,18 @@ public class AdminUserController {
     private final AdminUserService adminUserService;
 
     @GetMapping
-    public ResponseEntity<Page<User>> getAllUsers(Pageable pageable) {
-        return ResponseEntity.ok(adminUserService.getAllUsers(pageable));
+    public ResponseEntity<Page<UserResponse>> getAllUsers(Pageable pageable) {
+        Page<User> users = adminUserService.getAllUsers(pageable);
+        Page<UserResponse> userResponses = users.map(user -> new UserResponse(
+            user.getId(),
+            user.getUsername(),
+            user.getEmail(),
+            user.getRoles(),
+            user.isEnabled(),
+            user.getCreatedAt(),
+            user.getUpdatedAt()
+        ));
+        return ResponseEntity.ok(userResponses);
     }
 
     @GetMapping("/{id}")

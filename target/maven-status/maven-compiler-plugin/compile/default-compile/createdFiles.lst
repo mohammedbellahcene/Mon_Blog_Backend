@@ -44,7 +44,6 @@ com\blog\api\controller\AdminCategoryThemeController.class
 com\blog\api\dto\post\PostResponse$ThemeDto.class
 com\blog\api\config\OpenApiConfig.class
 com\blog\api\controller\AuthController.class
-com\blog\api\dto\user\UserResponse$UserResponseBuilder.class
 com\blog\api\service\CategoryService.class
 com\blog\api\repository\TagRepository.class
 com\blog\api\controller\AdminUserController.class
@@ -88,6 +87,7 @@ com\blog\api\service\UserActivityService.class
 com\blog\api\dto\post\PostResponse.class
 com\blog\api\dto\reaction\ReactionResponse.class
 com\blog\api\repository\PostRepository.class
+com\blog\api\controller\HelloController.class
 com\blog\api\dto\comment\CommentResponse$ModeratorDto.class
 com\blog\api\dto\comment\CommentResponse$AuthorDto.class
 com\blog\api\controller\AdminPostController.class
