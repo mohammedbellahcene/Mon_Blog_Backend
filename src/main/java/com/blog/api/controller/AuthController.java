@@ -6,6 +6,7 @@ import com.blog.api.dto.auth.RegisterRequest;
 import com.blog.api.dto.auth.TokenRequest;
 import com.blog.api.dto.auth.TokenResponse;
 import com.blog.api.service.AuthService;
+import com.blog.api.security.JwtProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,6 +18,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 @Tag(name = "Authentification", description = "API pour l'authentification et l'inscription des utilisateurs")
 @RestController
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+    private final JwtProvider jwtProvider;
 
     @Operation(summary = "Inscription d'un nouvel utilisateur",
             description = "Permet à un nouvel utilisateur de créer un compte")
@@ -65,5 +68,16 @@ public class AuthController {
     @PostMapping("/verify")
     public ResponseEntity<TokenResponse> verifyToken(@RequestBody TokenRequest request) {
         return ResponseEntity.ok(authService.validateToken(request.getToken()));
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateToken(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        boolean isValid = jwtProvider.validateToken(token);
+        if (isValid) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 } 

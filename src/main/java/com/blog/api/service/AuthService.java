@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.blog.api.service.PasswordValidator;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,15 @@ public class AuthService {
 
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email is already registered");
+        }
+
+        // Validation de la robustesse du mot de passe
+        if (!PasswordValidator.isStrong(request.getPassword())) {
+            throw new RuntimeException("Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.");
+        }
+        // Vérification de la confirmation du mot de passe
+        if (!request.getPassword().equals(request.getConfirmPassword())) {
+            throw new RuntimeException("Les mots de passe ne correspondent pas.");
         }
 
         User user = new User();

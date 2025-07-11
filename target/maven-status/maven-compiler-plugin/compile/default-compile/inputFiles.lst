@@ -38,6 +38,7 @@ C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\comment\C
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\post\PostResponse.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\config\OpenApiConfig.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\comment\CommentResponse.java
+C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\service\PasswordValidator.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\controller\ReactionController.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\config\SecurityConfig.java
 C:\Users\bella\Desktop\mon_blog\backend\src\main\java\com\blog\api\dto\auth\LoginRequest.java
