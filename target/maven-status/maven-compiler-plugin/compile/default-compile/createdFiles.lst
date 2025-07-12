@@ -7,6 +7,7 @@ com\blog\api\dto\post\CreatePostRequest.class
 com\blog\api\controller\AdminCommentController.class
 com\blog\api\dto\comment\CommentResponse.class
 com\blog\api\entity\Post.class
+com\blog\api\config\SecurityConfig$1.class
 com\blog\api\dto\user\UserResponse.class
 com\blog\api\controller\ReactionController.class
 com\blog\api\dto\post\CreatePostRequest$CreatePostRequestBuilder.class

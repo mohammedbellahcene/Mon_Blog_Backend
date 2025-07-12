@@ -138,4 +138,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
         Pageable pageable);
 
     List<Post> findAllByOrderByCreatedAtDesc();
+    List<Post> findTop5ByOrderByViewCountDesc();
+    @Query(value = "SELECT p.* FROM posts p LEFT JOIN comments c ON c.post_id = p.id GROUP BY p.id ORDER BY COUNT(c.id) DESC LIMIT 5", nativeQuery = true)
+    List<Post> findTop5MostCommented();
+    List<Post> findTop5ByOrderByLikeCountDesc();
+    List<Post> findTop5ByOrderByDislikeCountDesc();
 } 
