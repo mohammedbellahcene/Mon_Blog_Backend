@@ -43,10 +43,12 @@ public class SecurityConfig {
             .and()
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/error").permitAll()
-                .requestMatchers("/api/auth/**", "/auth/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/posts/**", "/posts/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/themes/**", "/themes/**").permitAll()
+                .requestMatchers("/hello").permitAll() // Corrigé : sans /api
+                .requestMatchers("/auth/**", "/auth/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/posts/**", "/posts/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/themes/**", "/themes/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

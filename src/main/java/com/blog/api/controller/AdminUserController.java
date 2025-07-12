@@ -9,13 +9,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import jakarta.annotation.PostConstruct;
 
-@RestController
-@RequestMapping("/api/admin/users")
 @RequiredArgsConstructor
+@RestController
+@RequestMapping("/admin/users")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminUserController {
     private final AdminUserService adminUserService;
+
+    @PostConstruct
+    public void logLoaded() {
+        System.out.println(">>> AdminUserController loaded <<<");
+    }
 
     @GetMapping
     public ResponseEntity<Page<UserResponse>> getAllUsers(Pageable pageable) {

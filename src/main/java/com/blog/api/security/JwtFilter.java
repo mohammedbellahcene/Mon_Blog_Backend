@@ -28,6 +28,15 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        String path = request.getRequestURI();
+        System.out.println(">>> JwtFilter path: " + path); // LOG de vérification du path
+        String authHeader = request.getHeader("Authorization");
+        System.out.println(">>> Authorization header: " + authHeader); // LOG du header Authorization
+        // Autoriser les routes publiques sans filtrage JWT
+        if (path.startsWith("/hello") || path.startsWith("/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         try {
             String jwt = getJwtFromRequest(request);
 
