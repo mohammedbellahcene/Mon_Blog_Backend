@@ -33,6 +33,8 @@ public class PostResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    private int commentCount;
+
     @Data
     public static class AuthorDto {
         private Long id;
@@ -92,6 +94,7 @@ public class PostResponse {
             .map(tag -> tag.getName())
             .collect(Collectors.toList()));
 
+        response.setCommentCount(post.getComments() != null ? post.getComments().size() : 0);
         return response;
     }
 } 
