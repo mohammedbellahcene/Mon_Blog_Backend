@@ -5,6 +5,8 @@ import com.blog.api.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +18,8 @@ public class AdminPostService {
     private final PostRepository postRepository;
 
     public Page<Post> getAllPosts(Pageable pageable) {
-        return postRepository.findAll(pageable);
+        Pageable sorted = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "createdAt"));
+        return postRepository.findAll(sorted);
     }
 
     public Optional<Post> getPostById(Long id) {
