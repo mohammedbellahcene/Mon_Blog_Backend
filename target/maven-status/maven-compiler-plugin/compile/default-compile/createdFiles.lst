@@ -34,12 +34,16 @@ com\blog\api\service\AdminUserService.class
 com\blog\api\config\SecurityConfig.class
 com\blog\api\entity\Comment$ModerationStatus.class
 com\blog\api\dto\auth\LoginRequest.class
+com\blog\api\controller\GlobalStatisticsController.class
 com\blog\api\service\AdminCommentService.class
 com\blog\api\dto\post\PostCreateRequest.class
 com\blog\api\controller\CommentModerationController.class
+com\blog\api\service\GlobalStatisticsService.class
 com\blog\api\dto\LoginRequest.class
+com\blog\api\entity\GlobalStatistics.class
 com\blog\api\security\UserDetailsServiceImpl.class
 com\blog\api\service\AdminStatisticsService.class
+com\blog\api\repository\GlobalStatisticsRepository.class
 com\blog\api\controller\UserActivityController.class
 com\blog\api\controller\AdminCategoryThemeController.class
 com\blog\api\dto\post\PostResponse$ThemeDto.class
