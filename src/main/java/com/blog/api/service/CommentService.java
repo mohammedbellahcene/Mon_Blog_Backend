@@ -27,6 +27,7 @@ public class CommentService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final NotificationService notificationService;
+    private final GlobalStatisticsService globalStatisticsService;
 
     public Page<CommentResponse> getCommentsByPost(Long postId, Pageable pageable) {
         Post post = postRepository.findById(postId)
@@ -64,6 +65,7 @@ public class CommentService {
         }
 
         Comment savedComment = commentRepository.save(comment);
+        globalStatisticsService.incrementComments();
 
         // Notifier l'auteur du post
         if (!post.getAuthor().equals(author)) {
@@ -123,6 +125,7 @@ public class CommentService {
         }
 
         commentRepository.delete(comment);
+        globalStatisticsService.decrementComments();
     }
 
     @Transactional

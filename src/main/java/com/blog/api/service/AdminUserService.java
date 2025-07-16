@@ -14,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AdminUserService {
     private final UserRepository userRepository;
+    private final GlobalStatisticsService globalStatisticsService;
 
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
@@ -45,5 +46,6 @@ public class AdminUserService {
             throw new RuntimeException("User not found");
         }
         userRepository.deleteById(id);
+        globalStatisticsService.decrementUsers();
     }
 } 

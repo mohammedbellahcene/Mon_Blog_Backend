@@ -32,6 +32,7 @@ public class PostService {
     private final ThemeRepository themeRepository;
     private final ReactionRepository reactionRepository;
     private final TagRepository tagRepository;
+    private final GlobalStatisticsService globalStatisticsService;
 
     public Page<PostResponse> getAllPosts(Pageable pageable) {
         return postRepository.findAllOrderByCreatedAtDesc(pageable)
@@ -110,6 +111,7 @@ public class PostService {
             updatePostFromRequest(post, request);
 
             Post savedPost = postRepository.save(post);
+            globalStatisticsService.incrementPosts();
             log.info("Article créé avec succès, ID: {}", savedPost.getId());
             
             return PostResponse.fromPost(savedPost, 0, 0);
@@ -160,6 +162,7 @@ public class PostService {
         }
 
         postRepository.delete(post);
+        globalStatisticsService.decrementPosts();
     }
 
     private void updatePostFromRequest(Post post, PostCreateRequest request) {

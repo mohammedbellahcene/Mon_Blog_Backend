@@ -22,4 +22,7 @@ public interface ReactionRepository extends JpaRepository<Reaction, Long> {
     void deleteByUserAndPost(User user, Post post);
     
     long countByPostAndType(Post post, Reaction.ReactionType type);
+    
+    @Query("SELECT COUNT(r) FROM Reaction r WHERE r.type = :type")
+    long countByType(com.blog.api.entity.Reaction.ReactionType type);
 } 

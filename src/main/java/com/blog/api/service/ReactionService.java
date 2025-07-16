@@ -19,6 +19,7 @@ public class ReactionService {
     private final ReactionRepository reactionRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final GlobalStatisticsService globalStatisticsService;
 
     @Transactional
     public ReactionResponse addReaction(Long postId, ReactionRequest request, String username) {
@@ -35,6 +36,11 @@ public class ReactionService {
         reaction.setPost(post);
         
         reaction = reactionRepository.save(reaction);
+        if (request.getType() == Reaction.ReactionType.LIKE) {
+            globalStatisticsService.incrementLikes();
+        } else if (request.getType() == Reaction.ReactionType.DISLIKE) {
+            globalStatisticsService.incrementDislikes();
+        }
         
         return mapToResponse(reaction);
     }
@@ -45,7 +51,15 @@ public class ReactionService {
             .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
         Post post = postRepository.findById(postId)
             .orElseThrow(() -> new RuntimeException("Article non trouvé"));
-
+        java.util.Optional<Reaction> reactionOpt = reactionRepository.findByUserAndPost(user, post);
+        if (reactionOpt.isPresent()) {
+            Reaction reaction = reactionOpt.get();
+            if (reaction.getType() == Reaction.ReactionType.LIKE) {
+                globalStatisticsService.decrementLikes();
+            } else if (reaction.getType() == Reaction.ReactionType.DISLIKE) {
+                globalStatisticsService.decrementDislikes();
+            }
+        }
         reactionRepository.deleteByUserAndPost(user, post);
     }
 

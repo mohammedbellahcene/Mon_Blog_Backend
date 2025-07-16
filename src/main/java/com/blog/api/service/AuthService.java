@@ -24,6 +24,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final AuthenticationManager authenticationManager;
+    private final GlobalStatisticsService globalStatisticsService;
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
@@ -51,6 +52,7 @@ public class AuthService {
         user.setRoles(new String[]{UserRole.ROLE_USER});
 
         userRepository.save(user);
+        globalStatisticsService.incrementUsers();
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
