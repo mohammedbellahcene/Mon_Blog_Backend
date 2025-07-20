@@ -60,7 +60,7 @@ public class OpenApiConfig {
                 .url("https://blog.com/docs"))
             .servers(Arrays.asList(
                 new Server()
-                    .url("http://localhost:8080")
+                    .url("http://localhost:8080/api")
                     .description("Serveur de développement"),
                 new Server()
                     .url("https://api.blog.com")
